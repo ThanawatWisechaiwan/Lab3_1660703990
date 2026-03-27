@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { useInventoryContext } from "../context/InventoryContext";
-import type { Product } from "../types";
 
 export default function Products() {
   const { products, addProduct, updateQuantity, deleteProduct } = useInventoryContext();
@@ -10,7 +9,7 @@ export default function Products() {
   const [qty, setQty] = useState(0);
   const [search, setSearch] = useState("");
 
-  const filtered = products.filter((p: Product) =>
+  const filtered = products.filter((p: any) =>
     p.name.toLowerCase().includes(search.toLowerCase())
   );
 
@@ -18,14 +17,12 @@ export default function Products() {
     <div className="p-4">
       <h1 className="text-xl font-bold">Products</h1>
 
-      {/* Search */}
       <input
         className="border p-2 my-2 w-full"
         placeholder="ค้นหา..."
         onChange={(e) => setSearch(e.target.value)}
       />
 
-      {/* Form */}
       <div className="flex gap-2 my-2">
         <input placeholder="ชื่อ" onChange={e => setName(e.target.value)} className="border p-1" />
         <input type="number" placeholder="ราคา" onChange={e => setPrice(+e.target.value)} className="border p-1" />
@@ -38,8 +35,7 @@ export default function Products() {
         </button>
       </div>
 
-      {/* List */}
-      {filtered.map((p: Product) => (
+      {filtered.map((p: any) => (
         <div
           key={p.id}
           className={`p-3 border my-2 ${p.quantity === 0 ? "bg-red-50" : ""}`}
